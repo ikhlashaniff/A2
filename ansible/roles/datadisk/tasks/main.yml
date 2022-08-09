@@ -1,0 +1,30 @@
+---
+- name: Creating new primary partitions 
+  parted:
+    device: "{{ item.device }}"
+    number:  "{{ item.number }}"
+    state: present
+    part_start: "{{ item.part_start }}"
+    part_end: "{{ item.part_end }}"
+  loop: "{{ diskinfo }}"
+
+- name: Creating directory /part1 and /part2                  
+  file:
+    path: "{{ item.path }}"
+    state: directory
+    mode: '0755'
+  loop: "{{ diskinfo }}"
+
+- name: Creating xfs and ext4 filesystems
+  filesystem:
+    fstype: "{{ item.fstype }}"
+    dev: "{{ item.partition }}"
+  loop: "{{ diskinfo }}"
+
+- name: Mounting part1 and part2 
+  mount:
+    path: "{{ item.path }}"
+    src: "{{ item.partition }}"
+    fstype: "{{ item.fstype }}"
+    state: mounted
+  loop: "{{ diskinfo }}"

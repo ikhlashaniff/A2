@@ -1,0 +1,20 @@
+---
+- name: installing webserver vm1
+  yum:
+    name: httpd
+    update_cache: yes
+    state: present
+  notify: restart_httpd
+
+- name: copying html file 1
+  copy:
+    src: "files/vm1.html"
+    dest: /var/www/html/index.html
+
+
+- name: changing permissions
+  file:
+    mode: 0444
+    path: /var/www/html/index.html
+    state: file
+

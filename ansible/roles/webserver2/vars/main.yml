@@ -1,0 +1,7 @@
+---
+# vars file for webserver
+packages: httpd
+
+filelist: 
+  - vm1.html
+  - vm2.html

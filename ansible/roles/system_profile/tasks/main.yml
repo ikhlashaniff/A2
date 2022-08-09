@@ -1,0 +1,11 @@
+---
+# tasks file for system_profile in linux
+- name: ADDING SSH TIMEOUT 
+  blockinfile:
+    path: "{{tmoutpath}}"
+    insertafter: EOF
+    backup: yes
+    state: present
+    block: |
+      export "“#This is a test block added by Ansible……Ikhlas-N01227514"
+      export TMOUT=1800

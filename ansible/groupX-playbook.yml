@@ -1,0 +1,22 @@
+---
+- name: playbook on linux group
+  hosts: linux
+  roles:
+    - datadisk
+    - system_profile
+    - users
+
+- name: playbook on vm1 
+  hosts: linux-7514-1.australiaeast.cloudapp.azure.com
+  roles: 
+    - webserver
+
+- name: playbook on vm2 
+  hosts: linux-7514-2.australiaeast.cloudapp.azure.com
+  roles: 
+    - webserver2
+
+
+
+
+
